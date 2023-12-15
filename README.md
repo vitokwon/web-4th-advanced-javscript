@@ -35,19 +35,19 @@ function readFile() {
   fs.readFile("data.txt", function (error, fileData) {
     // 'readFile'의 콜백함수로 매개변수(error,fileData) 수신
     console.log("File parsing done!");
-    console.log(fileData.toString()); // 함수 내부에서만 실행 가능.
+    console.log(fileData.toString()); // 함수 내부에서만 실행 가능 (fs.readFile 작업이 완료된 후 콜백함수로 작동)
   });
 
   // console.log(fileData.toString());
   // 에러 발생, Cannot read properties of undefined (reading 'toString')
-  // 'data.txt'파일을 읽음과 동시에 다음 코드 실행하기 때문. (비동기)
+  // 'data.txt'파일을 읽음 요청과 동시에 다음 코드 실행하기 때문. (비동기)
 
   console.log("Hi There!");
 
   // 출력 순서 (비동기, 완료되는 코드부터 출력)
   // 1. 'Hi There!'이 가장 먼저 출력 후,
-  // 2. 'File parsing done!' 출력
-  // 3. 'This works - data from the text file!' 출력.
+  // 2. 'File parsing done!' 출력 // fs.readFile 작업 완료 후 콜백함수 출력1
+  // 3. 'This works - data from the text file!' 출력. // fs.readFile 작업 완료 후 콜백함수 출력2
 }
 readFile();
 
